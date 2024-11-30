@@ -1,0 +1,42 @@
+### login
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+   "email": "erasmocs1@gmail.com",
+   "password": "3727"
+}
+
+
+
+### Teste de Criação de Usuário
+POST http://localhost:3000/users/create
+Content-Type: application/json
+
+{
+  "name": "Erasmo Cardoso",
+  "email": "erasmocs1@gmail.com",
+  "whatsapp": "119492243553",
+  "password": "3727"
+}
+
+### Teste para Obter Todos os Usuários
+GET http://localhost:3000/users/buscar
+
+### Teste para Obter um Usuário por ID
+GET http://localhost:3000/users/buscar/1
+
+### Teste de Atualização de Usuário
+PUT http://localhost:3000/users/atualizar/1
+Content-Type: application/json
+
+{
+  "name": "Erasmo Silva atualiza",
+  "email": "atualiza1-erasmo.silva@example.com",
+  "whatsapp": "11949224355",
+  "password": "senha456 atualiza"
+}
+
+### Teste de Exclusão de Usuário
+DELETE http://localhost:3000/users/deleta/47
