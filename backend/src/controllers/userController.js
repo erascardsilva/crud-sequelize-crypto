@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const { NumberWhats, CheckEmail } = require("../services/regras");
-const { BscryptGenerate } = require("../services/jwtService");
+const { BscryptGenerate, generateToken } = require("../services/jwtService");
 
 const login = async (req, res) => {
   try {
@@ -20,9 +20,15 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Senha incorreta" });
     }
 
+       // Gerar o JWT para o usuário
+       const token = generateToken({ userId: user.id, email: user.email });
+
     // Caso o login seja bem-sucedido, retorna os dados do usuário
-    return res.status(200).json({ user });
-    
+    return res.status(200).json({
+      message: "Login bem-sucedido",
+      user: { id: user.id, email: user.email },
+      token
+    });    
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Erro ao fazer login" });

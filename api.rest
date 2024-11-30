@@ -4,7 +4,7 @@ POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-   "email": "erasmocs1@gmail.com",
+   "email": "erasmocss@gmail.com",
    "password": "3727"
 }
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 {
   "name": "Erasmo Cardoso",
-  "email": "erasmocs1@gmail.com",
+  "email": "erasmocss@gmail.com",
   "whatsapp": "119492243553",
   "password": "3727"
 }
@@ -25,7 +25,7 @@ Content-Type: application/json
 GET http://localhost:3000/users/buscar
 
 ### Teste para Obter um Usuário por ID
-GET http://localhost:3000/users/buscar/1
+GET http://localhost:3000/users/buscar/56
 
 ### Teste de Atualização de Usuário
 PUT http://localhost:3000/users/atualizar/1
