@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
   "name": "Erasmo Cardoso",
-  "email": "erasmo5@gmail.com",
+  "email": "erasmo6@gmail.com",
   "whatsapp": "119492243553",
   "password": "mestre1234"
 }
@@ -23,7 +23,7 @@ Content-Type: application/json
 GET http://localhost:3000/users/buscar
 
 ### Teste para Obter um Usuário por ID
-GET http://localhost:3000/users/buscar/56
+GET http://localhost:3000/users/buscar/5
 
 ### Teste de Atualização de Usuário
 PUT http://localhost:3000/users/atualizar/1

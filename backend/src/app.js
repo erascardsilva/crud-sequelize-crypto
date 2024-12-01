@@ -1,3 +1,5 @@
+/* Crud com Mysql bcrypt e jwt trinando  */
+
 const Express = require('express');
 const app = Express();
 const cors = require('cors');
