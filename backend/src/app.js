@@ -1,4 +1,4 @@
-/* Crud com Mysql bcrypt e jwt trinando  */
+/* Crud com Mysql bcrypt e jwt treinando  */
 
 const Express = require('express');
 const app = Express();
