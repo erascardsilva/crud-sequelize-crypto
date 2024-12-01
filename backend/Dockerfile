@@ -4,6 +4,9 @@ FROM node:18-alpine
 # Criar o diretório da aplicação
 WORKDIR /app
 
+# Dependecia para bcrypto
+RUN apk add --no-cache make g++ python3
+
 # Copiar o package.json e o package-lock.json
 COPY package*.json ./
 

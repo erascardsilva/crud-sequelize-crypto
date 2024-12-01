@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const { SECRET_KEY, EXPIRES_IN } = require('../config/jwtConfig');
-const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
+
+
 
 function generateToken(payload){
     return jwt.sign(payload, SECRET_KEY, {expiresIn: EXPIRES_IN});
@@ -14,13 +16,25 @@ const verifyToken = (token) => {
   }
 
 };
-   // Gera hash da senha
-function BscryptGenerate(password) {
-    const hash = crypto.createHash('sha256');
-    hash.update(password);
-    return hash.digest('hex');
+ // Gera senha hash  Bcrypt 
+  const BscryptGenerate = async (password) => {
+    try {
+    const hash = await bcrypt.hash(password, 10);
+    return hash;
+    } catch (error) {
+
+      throw new Error('Erro ao gerar hash');
+    }
   };
+  
+  // Compara senha hash
+  const BscryptCompare = async (password, hash) => {
+    try {
+      return await bcrypt.compare(password, hash);
+  }catch(error){
 
-
-module.exports = { generateToken, verifyToken, BscryptGenerate };
+    throw new Error('Senha incorreta erro');
+  }
+  }
+module.exports = { generateToken, verifyToken, BscryptGenerate, BscryptCompare };
                   

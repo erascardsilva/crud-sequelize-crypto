@@ -1,6 +1,10 @@
 const User = require("../models/user");
 const { NumberWhats, CheckEmail } = require("../services/regras");
-const { BscryptGenerate, generateToken } = require("../services/jwtService");
+const {
+  BscryptGenerate,
+  BscryptCompare,
+  generateToken,
+} = require("../services/jwtService");
 
 const login = async (req, res) => {
   try {
@@ -8,38 +12,38 @@ const login = async (req, res) => {
 
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(401).json({ message: "Email ou senha incorretos" });
+      return res.status(401).json({ message: "Usuario não existe" });
     }
 
     const passwordHashStored = user.password;
 
-    const passwordHashLogin = BscryptGenerate(password);  
-
-    // Compara os hashes
-    if (passwordHashLogin !== passwordHashStored) {
-      return res.status(401).json({ message: "Senha incorreta" });
+    const passwordHashLogin = await BscryptCompare(
+      password,
+      passwordHashStored
+    );
+    
+     // Verifica se a variavel é true ou false
+    if (!passwordHashLogin) {
+      return res.status(401).json({ message: "Email ou senha incorretos" });
     }
 
-       // Gerar o JWT para o usuário
-       const token = generateToken({ userId: user.id, email: user.email });
+    const token = generateToken({ userId: user.id, email: user.email });
 
-    // Caso o login seja bem-sucedido, retorna os dados do usuário
     return res.status(200).json({
       message: "Login bem-sucedido",
-      user: { id: user.id, email: user.email },
+      user: { id: user.id, email: user.email, hash: user.password },
       token
-    });    
+     
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Erro ao fazer login" });
   }
 };
 
-
 const createUser = async (req, res) => {
   try {
     const { name, email, whatsapp, password } = req.body;
-
     const emailexist = await User.findOne({ where: { email } });
 
     // Valida o número do WhatsApp e o email
@@ -47,14 +51,15 @@ const createUser = async (req, res) => {
     CheckEmail(emailexist);
 
     // Valida o tipo da senha
-    if (typeof password !== 'string' || Array.isArray(password)) {
-      return res.status(400).json({ error: "A senha deve ser uma string válida" });
+    if (typeof password !== "string" || Array.isArray(password)) {
+      return res
+        .status(400)
+        .json({ error: "A senha deve ser uma string válida" });
     }
 
-    // Criptografa a senha
-   
-    const passwordHash =  BscryptGenerate(password);
-    
+    // Criptografa a senha bcrypt
+    const passwordHash = await BscryptGenerate(password);
+
     // Cria o usuário no banco de dados
     const user = await User.create({
       name,
@@ -72,7 +77,6 @@ const createUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 
 const getAllUsers = async (req, res) => {
   try {

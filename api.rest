@@ -4,11 +4,9 @@ POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-   "email": "erasmocss@gmail.com",
-   "password": "3727"
+   "email": "erasmo5@gmail.com",
+   "password": "mestre1234"
 }
-
-
 
 ### Teste de Criação de Usuário
 POST http://localhost:3000/users/create
@@ -16,9 +14,9 @@ Content-Type: application/json
 
 {
   "name": "Erasmo Cardoso",
-  "email": "erasmocss@gmail.com",
+  "email": "erasmo5@gmail.com",
   "whatsapp": "119492243553",
-  "password": "3727"
+  "password": "mestre1234"
 }
 
 ### Teste para Obter Todos os Usuários
