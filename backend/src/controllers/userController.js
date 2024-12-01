@@ -1,10 +1,7 @@
 const User = require("../models/user");
 const { NumberWhats, CheckEmail } = require("../services/regras");
-const {
-  BscryptGenerate,
-  BscryptCompare,
-  generateToken,
-} = require("../services/jwtService");
+const { generateToken, verifyToken } = require("../services/jwtService");
+const { BscryptGenerate, BscryptCompare } = require("../services/bcryptService");
 
 const login = async (req, res) => {
   try {

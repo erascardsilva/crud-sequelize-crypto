@@ -1,17 +1,22 @@
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config/jwtConfig");
-const { verifiyToken } = require("../services/jwtService");
+const { verifyToken } = require("../services/jwtService"); 
 
-const auth = (res, req, next ) =>{
-    const authHearder = req.headers["authorization"];
-    const token = authHearder && authHearder.split(" ")[1];
+const auth = (req, res, next) => {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1]; 
 
-    if(!token) return res.status(401).json({message: "Token nao enviado"});
+    if (!token) {
+        return res.status(401).json({ message: "Token não enviado" });
+    }
 
-    verifyToken(token);
-        req.user = user;
-        next();
-    };
+    try {
+        const user = verifyToken(token); 
+        req.user = user; 
+        next(); 
+    } catch (error) {
+        return res.status(403).json({ message: "Token inválido ou expirado" });
+    }
+};
 
-
-module. exports = { auth };    
+module.exports = { auth }; 
