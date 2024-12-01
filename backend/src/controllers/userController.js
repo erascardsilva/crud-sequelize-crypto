@@ -1,7 +1,10 @@
 const User = require("../models/user");
 const { NumberWhats, CheckEmail } = require("../services/regras");
 const { generateToken, verifyToken } = require("../services/jwtService");
-const { BscryptGenerate, BscryptCompare } = require("../services/bcryptService");
+const {
+  BscryptGenerate,
+  BscryptCompare,
+} = require("../services/bcryptService");
 
 const login = async (req, res) => {
   try {
@@ -18,8 +21,8 @@ const login = async (req, res) => {
       password,
       passwordHashStored
     );
-    
-     // Verifica se a variavel é true ou false
+
+    // Verifica se a variavel é true ou false
     if (!passwordHashLogin) {
       return res.status(401).json({ message: "Email ou senha incorretos" });
     }
@@ -29,8 +32,7 @@ const login = async (req, res) => {
     return res.status(200).json({
       message: "Login bem-sucedido",
       user: { id: user.id, email: user.email, hash: user.password },
-      token
-     
+      token,
     });
   } catch (error) {
     console.error(error);
