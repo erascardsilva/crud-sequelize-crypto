@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "node",
+            "name": "debug app.js",
+            "request": "launch",
+            "args": [],
+            "program": "/home/erasmo/GITHUB/crud-sequelize/backend/src/app.js"
+        }
+    ]
+}

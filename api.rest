@@ -1,10 +1,13 @@
+### Definir a variável token
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJlbWFpbCI6ImVyYXNtbzEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MzMzNzUyOTIsImV4cCI6MTczMzM3ODg5Mn0.Mo2qkhuQu1x__9SZOm1G3T5MzrIXLlGqvv8NxAybeYk
+
 ### login
 
 POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-   "email": "erasmo@gmail.com",
+   "email": "erasmo101@gmail.com",
    "password": "mestre1234"
 }
 
@@ -14,19 +17,22 @@ Content-Type: application/json
 
 {
   "name": "Erasmo Cardoso",
-  "email": "erasmo7@gmail.com",
+  "email": "erasmo101@gmail.com",
   "whatsapp": "119492243553",
   "password": "mestre1234"
 }
 
 ### Teste para Obter Todos os Usuários
 GET http://localhost:3000/users/buscar
+Authorization: Bearer {{token}}
 
 ### Teste para Obter um Usuário por ID
-GET http://localhost:3000/users/buscar/5
+GET http://localhost:3000/users/buscar/13
+Authorization: Bearer {{token}}
 
 ### Teste de Atualização de Usuário
 PUT http://localhost:3000/users/atualizar/1
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -38,3 +44,4 @@ Content-Type: application/json
 
 ### Teste de Exclusão de Usuário
 DELETE http://localhost:3000/users/deleta/47
+Authorization: Bearer {{token}}
